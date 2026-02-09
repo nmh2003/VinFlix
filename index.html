@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://phimapi.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Force HTTPS for mixed content if API returns HTTP links -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>VinFlix - Xem Phim Online</title>
+    
+    <!-- Player Styles -->
+    <!-- Vidstack -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack@1.11.2/player/styles/default/theme.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack@1.11.2/player/styles/default/layouts/video.css" />
+    <!-- Video.js -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <!-- Shaka Player UI -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shaka-player@4.7.11/dist/controls.css" />
+    <!-- XGPlayer UI -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xgplayer@3.0.10/dist/index.min.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#e50914',
+              dark: '#141414',
+              darker: '#0b0b0b',
+              gray: {
+                800: '#1f1f1f',
+                900: '#181818'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style type="text/tailwindcss">
+      @layer base {
+        body {
+          @apply bg-gray-100 text-gray-900 dark:bg-darker dark:text-[#e5e5e5] font-sans overflow-x-hidden transition-colors duration-300;
+        }
+      }
+      
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        @apply bg-gray-200 dark:bg-[#0b0b0b]; 
+      }
+      ::-webkit-scrollbar-thumb {
+        @apply bg-gray-400 dark:bg-[#333] rounded;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-500 dark:bg-[#555]; 
+      }
+      
+      /* Vidstack Overrides for Dark Theme */
+      media-player {
+        --brand: #e50914;
+        --media-brand: #e50914;
+        --media-color: #ffffff;
+        --media-text-color: #ffffff;
+        color: white;
+      }
+
+      /* Video.js Overrides */
+      .video-js .vjs-big-play-button {
+        background-color: rgba(229, 9, 20, 0.8);
+        border: none;
+        border-radius: 50%;
+        width: 2em;
+        height: 2em;
+        line-height: 2em;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+      }
+
+      /* Shaka Player Overrides */
+      .shaka-overflow-menu-button {
+        color: white !important;
+      }
+      .shaka-controls-button-panel .material-icons-round {
+        color: white !important;
+      }
+      .shaka-range-element {
+        accent-color: #e50914 !important;
+      }
+
+      /* XGPlayer Overrides */
+      xg-player {
+        --xg-player-theme: #e50914;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?deps=react@18.2.0",
+    "react-dom": "https://esm.sh/react-dom@18.2.0?deps=react@18.2.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?deps=react@18.2.0,react-dom@18.2.0",
+    "@tanstack/react-query": "https://esm.sh/@tanstack/react-query@5.28.4?deps=react@18.2.0",
+    "lucide-react": "https://esm.sh/lucide-react@0.363.0?deps=react@18.2.0",
+    "hls.js": "https://esm.sh/hls.js@1.5.7",
+    "@vidstack/react": "https://esm.sh/@vidstack/react@1.11.2?deps=react@18.2.0,react-dom@18.2.0,vidstack@1.11.2",
+    "@vidstack/react/player/layouts/default": "https://esm.sh/@vidstack/react@1.11.2/player/layouts/default?deps=react@18.2.0,react-dom@18.2.0,vidstack@1.11.2",
+    "vidstack": "https://esm.sh/vidstack@1.11.2",
+    "react-helmet": "https://esm.sh/react-helmet@6.1.0?deps=react@18.2.0",
+    "video.js": "https://esm.sh/video.js@8.10.0",
+    "react-player": "https://esm.sh/react-player@2.15.1?deps=react@18.2.0",
+    "shaka-player": "https://esm.sh/shaka-player@4.7.11/dist/shaka-player.ui.js",
+    "@oplayer/core": "https://esm.sh/@oplayer/core@1.2.20",
+    "@oplayer/ui": "https://esm.sh/@oplayer/ui@1.2.20?deps=@oplayer/core@1.2.20",
+    "@oplayer/hls": "https://esm.sh/@oplayer/hls@1.2.20?deps=@oplayer/core@1.2.20,hls.js@1.5.7",
+    "nipplejs": "https://esm.sh/nipplejs@0.10.1",
+    "xgplayer": "https://esm.sh/xgplayer@3.0.10",
+    "xgplayer-hls": "https://esm.sh/xgplayer-hls@3.0.10?deps=xgplayer@3.0.10",
+    "lottie-react": "https://esm.sh/lottie-react@2.4.0?deps=react@18.2.0",
+    "tesseract.js": "https://esm.sh/tesseract.js@5.0.5",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "qrcode.react": "https://esm.sh/qrcode.react@3.1.0?deps=react@18.2.0",
+    "mathjs": "https://esm.sh/mathjs@12.4.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
